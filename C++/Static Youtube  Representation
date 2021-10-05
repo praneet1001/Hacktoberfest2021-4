@@ -1,0 +1,97 @@
+#include<iostream>
+#include<list>
+using namespace std;
+
+class YoutubeChannel{
+private :
+    string ChannelName;
+    int Subscribercount;
+    list<string> VideoTitles;
+protected:
+    string OwnerName;
+    int Content;
+public:
+    YoutubeChannel(string Owner, string Name){
+        OwnerName = Owner;
+        ChannelName = Name;
+        Subscribercount = 0;
+        Content = 0;
+    }
+    void GetInfo(){
+    cout<<"Owner Name : "<<OwnerName<<endl;
+    cout<<"Channel Name : "<<ChannelName<<endl;
+    cout<<"Subscriber : "<<Subscribercount<<endl;
+    cout<<"Video :"<<endl;
+    for(string VideoTitles : VideoTitles){
+        cout<<VideoTitles<<endl;
+    }
+    }
+    void Subscribe(){
+        Subscribercount++;
+    }
+    void Unsubscribe(){
+        if(Subscribercount>0)
+        Subscribercount--;
+    }
+    void Videos(string title){
+        VideoTitles.push_back(title);
+    }
+    void CheckAnalytics(){
+        if(Content<5){
+            cout<<ChannelName<<" analytic's is bad"<<endl;
+        }
+        else{
+            cout<<ChannelName<<"is doing great"<<endl;
+        }
+    }
+};
+class GameYoutubeChannel:public YoutubeChannel{
+    public:
+    GameYoutubeChannel(string Owner,string Name):YoutubeChannel(Owner,Name){
+
+    }
+    void Desc(){
+        cout<<OwnerName <<" is still Learning to go Pro"<<endl;
+        Content++;
+    }
+};
+class RapYoutubeChannel:public YoutubeChannel{
+    public:
+    RapYoutubeChannel(string Owner,string Name):YoutubeChannel(Owner,Name){
+
+    }
+    void Desc(){
+        cout<<OwnerName <<" owns the west coast"<<endl;
+        Content++;
+    }
+};
+int main(){
+    GameYoutubeChannel GYT("Praneet","Yeezy");
+    GYT.Videos("PUBG");
+    GYT.Videos("COD");
+    GYT.Videos("GOD of War");
+    GYT.Subscribe();
+    GYT.Subscribe();
+    GYT.Unsubscribe();
+    GYT.GetInfo();
+    GYT.Desc();
+    cout<<endl;
+    GameYoutubeChannel GYT2("Zack","YourDad");
+    GYT2.Videos("Mortal Combat");
+    GYT2.Subscribe();
+    GYT2.GetInfo();
+    GYT2.Desc();
+    GYT2.Desc();
+    GYT2.CheckAnalytics();
+    cout<<endl;
+    RapYoutubeChannel RYT("Snoop","DoggyDog");
+    RYT.Videos("Gin and Juice");
+    RYT.Subscribe();
+    RYT.GetInfo();
+    RYT.Desc();
+    RYT.Desc();
+    RYT.Desc();
+    RYT.CheckAnalytics();
+    cout<<endl;
+    return 0;
+}
